@@ -39,9 +39,37 @@ const savedate =  async(name, email, mobile) =>{
     }
     // untuk mebuat data yg di input ke array
     json = JSON.stringify(obj)
-    //untuk menulis data pada json
+    //untuk menulis data pada jsongit
     fs.writeFileSync('data/contacts.json', json)
     process.exit(0)
 }
 
-module.exports = { savedate};
+
+const loadContacts = function () {
+    try {
+        const data = fs.readFileSync('data/contacts.json');
+        return JSON.parse(data);
+    } catch (e) {
+        return [];
+    }
+}
+
+
+
+const detaildate = function(name) {
+    const date = loadContacts()
+    const contactsToKeep = date.filter(function(contact) {
+        return contact.name == name
+    })
+    
+    if(contactsToKeep.length == 0){
+        console.log("data not Found")
+        process.exit()
+    }
+    
+    
+    console.log(contactsToKeep[0].name)
+    console.log(contactsToKeep[0].email)
+    console.log(contactsToKeep[0].mobile)
+}
+module.exports = { savedate, removedate, detaildate};

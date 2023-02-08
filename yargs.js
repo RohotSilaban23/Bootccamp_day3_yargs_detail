@@ -46,5 +46,25 @@ yargs.command({
 
 })
 
+
+
+yargs.command({
+    command: 'detail',
+    describe: 'detail a contact',
+    builder:{
+        name:{
+            describe:'contact Name',
+            demandOption: true,
+            type:'string',
+        }
+        
+    },
+    handler(argv){
+
+            funtion.detaildate(argv.name);     
+    }
+
+})
+
 yargs.parse()
 // console.log(yargs.argv)
